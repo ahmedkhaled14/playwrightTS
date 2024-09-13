@@ -46,11 +46,5 @@ export default defineConfig({
         ...devices['Desktop Firefox'],
       },
     },
-    {
-      name: 'Run on iphone',
-      use: {
-        ...devices['iPhone 15 Pro'],
-      },
-    },
   ],
 });
