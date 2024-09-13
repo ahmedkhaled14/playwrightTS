@@ -22,10 +22,10 @@
 
  *  integrated with allure report
 
- *  CI/CD pipeline using github actions (triggered the CI Action whenever I created a new Pull Request)
+ *  CI/CD pipeline using github actions (create workflows that build and test every pull request)
  
  
-#### 🔊 this project included
+#### 🔊 this project included:
 
 #### 📦️ folder for github workflows
 
