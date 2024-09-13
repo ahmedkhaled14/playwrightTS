@@ -18,7 +18,7 @@
 
  *  Page Object Model design pattern (POM)
  
- *  read all test data from external json file
+ *  read all test data from external json files
 
  *  integrated with allure report
 
