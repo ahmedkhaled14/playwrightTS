@@ -13,7 +13,7 @@ export default defineConfig({
 
   workers: process.env.CI ? 4 : 4,
 
-  reporter: process.env.CI ? 'html' : [
+  reporter: process.env.CI ? [['dot'],['list'],['html']] : [
     ['list'],
     ['json', { outputFile: 'results.json' }],
     ['html', { open: 'always', outputFolder: 'my-report' }],
@@ -31,7 +31,7 @@ export default defineConfig({
     trace: 'retain-on-failure',
     screenshot: 'on',
     video: 'retain-on-failure',
-    headless: false
+    headless: true
   },
   projects: [
     {
