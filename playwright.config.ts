@@ -35,7 +35,7 @@ export default defineConfig({
   },
   projects: [
     {
-      name: 'Run on chrome Browser maximized Window',
+      name: 'Run on chrome Browser',
       use: {
         viewport: null,
       },
