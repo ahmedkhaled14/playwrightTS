@@ -27,13 +27,13 @@
  
 #### 🔊 this project included:
 
-#### 📦️ folder for github workflows
+* 📦️ folder for github workflows
 
-#### 📦️ folder for all pages
+* 📦️ folder for all pages
 
-#### 📦️ folder for all tests
+* 📦️ folder for all tests
 
-#### 📦️ folder for all test data
+* 📦️ folder for all test data
 
  
 #### ⚗️ playwright config file
