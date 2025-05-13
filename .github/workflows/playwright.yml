@@ -1,4 +1,3 @@
-
 name: Playwright Tests
 
 on:
@@ -30,9 +29,7 @@ jobs:
   test:
     timeout-minutes: 15
     runs-on: ${{ github.event.inputs.os || 'ubuntu-latest' }}
-    strategy:
-      matrix:
-        browser: [chromium, firefox, webkit]
+
     steps:
       - uses: actions/checkout@v4
 
@@ -46,14 +43,14 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Run Playwright tests on ${{ matrix.browser }}
-        run: npx playwright test --project=${{ matrix.browser }}
+      - name: Run Playwright tests on ${{ github.event.inputs.browser }}
+        run: npx playwright test --project=${{ github.event.inputs.browser }}
         env:
-          BROWSER: ${{ matrix.browser }}
+          BROWSER: ${{ github.event.inputs.browser }}
 
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: playwright-report-${{ matrix.browser }}
+          name: playwright-report-${{ github.event.inputs.browser }}
           path: playwright-report/
           retention-days: 30
