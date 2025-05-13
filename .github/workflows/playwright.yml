@@ -1,16 +1,27 @@
+
 name: Playwright Tests
 
 on:
   workflow_dispatch:
     inputs:
       browser:
-        description: 'Browser to run tests on (chromium, firefox, webkit)'
+        description: 'Select browser to run tests on'
         required: true
         default: 'chromium'
+        type: choice
+        options:
+          - chromium
+          - firefox
+          - webkit
       os:
-        description: 'Operating system (ubuntu-latest, windows-latest, macos-latest)'
+        description: 'Select operating system'
         required: true
         default: 'ubuntu-latest'
+        type: choice
+        options:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
   push:
     branches: [main]
   pull_request:
@@ -25,6 +36,7 @@ jobs:
         browser: [chromium, firefox, webkit]
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
@@ -41,7 +53,7 @@ jobs:
           BROWSER: ${{ matrix.browser }}
 
       - uses: actions/upload-artifact@v4
-        if: ${{ !cancelled() }}
+        if: always()
         with:
           name: playwright-report-${{ matrix.browser }}
           path: playwright-report/
