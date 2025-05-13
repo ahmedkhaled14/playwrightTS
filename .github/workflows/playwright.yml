@@ -43,14 +43,14 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Run Playwright tests on ${{ github.event.inputs.browser }}
+      - name: Run Playwright tests on ${{ github.event.inputs.browser || 'chromium' }}
         run: npx playwright test --project=${{ github.event.inputs.browser || 'chromium' }}
         env:
-          BROWSER: ${{ github.event.inputs.browser }}
+          BROWSER: ${{ github.event.inputs.browser || 'chromium' }}
 
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: playwright-report-${{ github.event.inputs.browser }}
+          name: playwright-report-${{ github.event.inputs.browser || 'chromium' }}
           path: playwright-report/
           retention-days: 30
