@@ -44,7 +44,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests on ${{ github.event.inputs.browser }}
-        run: npx playwright test --project=${{ github.event.inputs.browser }}
+        run: npx playwright test --project=${{ github.event.inputs.browser || 'chromium' }}
         env:
           BROWSER: ${{ github.event.inputs.browser }}
 
