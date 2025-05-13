@@ -1,6 +1,6 @@
-import { defineConfig, devices } from '@playwright/test';
 
-const browserName = process.env.BROWSER || 'chromium';
+
+import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: 'tests',
@@ -13,57 +13,38 @@ export default defineConfig({
 
   workers: process.env.CI ? 4 : 4,
 
-  reporter: process.env.CI
-    ? [['dot'], ['list'], ['html']]
-    : [
-        ['list'],
-        ['json', { outputFile: 'results.json' }],
-        ['html', { open: 'always', outputFolder: 'my-report' }],
-        ['allure-playwright', { outputFolder: 'allure-results' }],
-      ],
+  reporter: process.env.CI ? [['dot'],['list'],['html']] : [
+    ['list'],
+    ['json', { outputFile: 'results.json' }],
+    ['html', { open: 'always', outputFolder: 'my-report' }],
+    ['allure-playwright', { outputFolder: 'allure-results' }]
+  ],
 
+  
   use: {
+
     launchOptions: {
-      args: ['--start-maximized'],
+      args: ["--start-maximized"],
     },
+
     baseURL: 'https://www.saucedemo.com/',
     trace: 'retain-on-failure',
     screenshot: 'on',
     video: 'retain-on-failure',
-    headless: true,
+    headless: true
   },
-
   projects: [
-    ...(browserName === 'chromium'
-      ? [
-          {
-            name: 'chromium',
-            use: {
-              ...devices['Desktop Chrome'],
-              viewport: null,
-            },
-          },
-        ]
-      : []),
-    ...(browserName === 'firefox'
-      ? [
-          {
-            name: 'firefox',
-            use: {
-              ...devices['Desktop Firefox'],
-            },
-          },
-        ]
-      : []),
-    ...(browserName === 'webkit'
-      ? [
-          {
-            name: 'webkit',
-            use: {
-              ...devices['Desktop Safari'],
-            },
-          },
-        ]
-      : []),
+    {
+      name: 'Run on chrome Browser',
+      use: {
+        viewport: null,
+      },
+    },
+    {
+      name: 'Run on fireFox Browser',
+      use: {
+        ...devices['Desktop Firefox'],
+      },
+    },
   ],
 });
