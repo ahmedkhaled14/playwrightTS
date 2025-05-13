@@ -1,4 +1,3 @@
-
 name: Playwright Tests
 
 on:
@@ -40,11 +39,11 @@ on:
 jobs:
   test:
     timeout-minutes: 15
-    runs-on: ${{ github.event.inputs.os }}
+    runs-on: ${{ github.event.inputs.os || 'ubuntu-latest' }}
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.inputs.branch }}
+          ref: ${{ github.event.inputs.branch || github.ref_name }}
 
       - uses: actions/setup-node@v4
         with:
@@ -55,13 +54,12 @@ jobs:
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-
       - name: Run Playwright tests
         run: |
-          npx playwright test --project="${{ github.event.inputs.browser }}"
+          npx playwright test --project="${{ github.event.inputs.browser || 'Run on chrome Browser' }}"
 
       - uses: actions/upload-artifact@v4
-        if: ${{ !cancelled() }}
+        if: always()
         with:
           name: playwright-report
           path: playwright-report/
