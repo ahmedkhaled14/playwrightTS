@@ -15,12 +15,11 @@ on:
       browser:
         description: 'Select the browser'
         required: true
-        default: 'chromium'
+        default: 'Run on chrome Browser'
         type: choice
         options:
-          - chromium
-          - firefox
-          - webkit
+          - Run on chrome Browser
+          - Run on fireFox Browser
       os:
         description: 'Select the operating system'
         required: true
@@ -52,10 +51,10 @@ jobs:
 
       - name: Run Playwright tests
         run: |
-          npx playwright test --project="Run on ${{ github.event.inputs.browser }} Browser"
+          npx playwright test --project="${{ github.event.inputs.browser }}"
 
       - uses: actions/upload-artifact@v4
-        if: always()
+        if: ${{ !cancelled() }}
         with:
           name: playwright-report
           path: playwright-report/
